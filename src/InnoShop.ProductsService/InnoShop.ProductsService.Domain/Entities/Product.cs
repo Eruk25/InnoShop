@@ -17,7 +17,7 @@ public class Product
         UpdateTitle(title);
         UpdateDescription(description);
         UpdatePrice(price);
-        UpdateStatus(Status.IsActive);
+        UpdateStatus(Status.Active);
         UpdateUserId(userId);
         CreatedAt = DateTime.UtcNow;
     }
