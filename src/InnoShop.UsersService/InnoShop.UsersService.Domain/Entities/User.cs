@@ -11,14 +11,13 @@ public class User
     public Status Status { get; private set; }
     public string Password { get; private set; }
 
-    public User(string name, string email, string password,
-        Role role = Role.Seller, Status status = Status.Active)
+    public User(string name, string email, string password)
     {
         UpdateName(name);
         UpdateEmail(email);
         UpdatePassword(password);
-        UpdateRole(role);
-        UpdateStatus(status);
+        UpdateRole(Role.Seller);
+        UpdateStatus(Status.Active);
     }
 
     public void UpdateName(string name)
