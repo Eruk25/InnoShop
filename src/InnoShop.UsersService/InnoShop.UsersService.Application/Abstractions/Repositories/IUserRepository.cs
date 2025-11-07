@@ -1,6 +1,6 @@
 using InnoShop.UsersService.Domain.Entities;
 
-namespace InnoShop.UsersService.Application.Abstractions.Repository;
+namespace InnoShop.UsersService.Application.Abstractions.Repositories;
 
 public interface IUserRepository
 {
