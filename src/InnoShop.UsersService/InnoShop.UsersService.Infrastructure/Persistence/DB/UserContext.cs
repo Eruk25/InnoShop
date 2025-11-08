@@ -1,14 +1,15 @@
 using InnoShop.UsersService.Domain.Entities;
+using InnoShop.UsersService.Infrastructure.Persistence.DB.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace InnoShop.UsersService.Infrastructure.Persistence.DB;
 
-public class UsersContext(DbContextOptions<UsersContext> options) : DbContext(options)
+public class UserContext(DbContextOptions<UserContext> options) : DbContext(options)
 {
     public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
     }
 }
