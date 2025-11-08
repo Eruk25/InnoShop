@@ -1,6 +1,7 @@
 using InnoShop.ProductsService.Application.Abstractions.Repositories;
 using InnoShop.ProductsService.Domain.Entities;
 using InnoShop.ProductsService.Infrastructure.Persistence.DB;
+using Microsoft.EntityFrameworkCore;
 
 namespace InnoShop.ProductsService.Infrastructure.Persistence.Repositories;
 
@@ -13,28 +14,45 @@ public class ProductRepository : IProductRepository
         _context = context;
     }
     
-    public Task<IEnumerable<Product>> GetAllAsync()
+    public async Task<IEnumerable<Product>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Products.ToListAsync();
     }
 
-    public Task<Product> GetByIdAsync(int id)
+    public async Task<Product?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var product = await _context.Products
+            .FirstOrDefaultAsync(p => p.Id == id);
+        return product;
     }
 
-    public Task<int> CreateAsync(Product product)
+    public async Task<int> CreateAsync(Product product)
     {
-        throw new NotImplementedException();
+        await _context.Products.AddAsync(product);
+        await _context.SaveChangesAsync();
+        return product.Id;
     }
 
-    public Task<Product> UpdateAsync(int id, Product product)
+    public async Task<Product> UpdateAsync(int id, Product product)
     {
-        throw new NotImplementedException();
+        var existing = await _context.Products
+            .FirstAsync(p => p.Id == id);
+        existing.UpdateTitle(product.Title);
+        existing.UpdateDescription(product.Description);
+        existing.UpdatePrice(product.Price);
+        existing.UpdateStatus(product.Status);
+        existing.UpdateUserId(product.UserId);
+        await _context.SaveChangesAsync();
+        return existing;
     }
 
-    public Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        var product = _context.Products.FirstOrDefault(p => p.Id == id);
+        if(product is null)
+            return false;
+        _context.Products.Remove(product);
+        await _context.SaveChangesAsync();
+        return true;
     }
 }
