@@ -1,6 +1,7 @@
 ﻿using InnoShop.UsersService.Application.Abstractions.Repositories;
 using InnoShop.UsersService.Domain.Entities;
 using InnoShop.UsersService.Infrastructure.Persistence.DB;
+using Microsoft.EntityFrameworkCore;
 
 namespace InnoShop.UsersService.Infrastructure.Persistence.Repositories;
 
@@ -13,28 +14,46 @@ public class UserRepository : IUserRepository
         _context = context;
     }
     
-    public Task<IEnumerable<User>> GetAllAsync()
+    public async Task<IEnumerable<User>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Users.ToListAsync();
     }
 
-    public Task<User> GetByIdAsync(int id)
+    public async Task<User?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var product = await _context.Users
+            .FirstOrDefaultAsync(u => u.Id == id);
+        return product;
     }
 
-    public Task<int> CreateAsync(User user)
+    public async Task<int> CreateAsync(User user)
     {
-        throw new NotImplementedException();
+        await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
+        return user.Id;
     }
 
-    public Task<User> UpdateAsync(User user)
+    public async Task<User> UpdateAsync(int id, User user)
     {
-        throw new NotImplementedException();
+        var existing = await _context.Users.
+            FirstAsync(u => u.Id == id);
+        existing.UpdateName(user.Name);
+        existing.UpdateEmail(user.Email);
+        existing.UpdateRole(user.Role);
+        existing.UpdateStatus(user.Status);
+        existing.UpdatePassword(user.Password);
+        await _context.SaveChangesAsync();
+        return existing;
     }
 
-    public Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        var user = await _context.Users.
+            FirstOrDefaultAsync(u => u.Id == id);
+        if (user is null)
+            return false;
+        _context.Users.Remove(user);
+        await _context.SaveChangesAsync();
+        return true;
     }
 }
