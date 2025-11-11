@@ -20,6 +20,16 @@ public class User
         UpdateStatus(Status.Active);
     }
 
+    public void UpdateProfile(string? name, string? email, string? password)
+    {
+        if(!string.IsNullOrWhiteSpace(name))
+            UpdateName(name);
+        if(!string.IsNullOrWhiteSpace(email))
+            UpdateEmail(email);
+        if(!string.IsNullOrWhiteSpace(password))
+            UpdatePassword(password);
+    }
+    
     public void UpdateName(string name)
     {
         if(string.IsNullOrWhiteSpace(name))
