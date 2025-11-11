@@ -1,6 +1,7 @@
 using AutoMapper;
 using InnoShop.UsersService.Application.Abstractions.PasswordHasher;
 using InnoShop.UsersService.Application.Abstractions.Repositories;
+using InnoShop.UsersService.Application.Users.Results;
 using InnoShop.UsersService.Domain.Entities;
 using InnoShop.UsersService.Domain.Exceptions;
 using MediatR;
