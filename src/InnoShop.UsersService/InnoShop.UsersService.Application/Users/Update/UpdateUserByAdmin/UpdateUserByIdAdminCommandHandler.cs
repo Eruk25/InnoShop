@@ -3,7 +3,7 @@ using InnoShop.UsersService.Application.Abstractions.Repositories;
 using InnoShop.UsersService.Application.Users.Results;
 using MediatR;
 
-namespace InnoShop.UsersService.Application.Users.Update.UpdateUserByAdminCommand;
+namespace InnoShop.UsersService.Application.Users.Update.UpdateUserByAdmin;
 
 public class UpdateUserByIdAdminCommandHandler : IRequestHandler<UpdateUserByAdminCommand, UpdateUserByAdminResult>
 {
