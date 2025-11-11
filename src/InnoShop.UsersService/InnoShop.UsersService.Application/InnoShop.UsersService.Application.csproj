@@ -7,11 +7,11 @@
   <ItemGroup>
     <Folder Include="Users\Register" />
     <Folder Include="Users\Delete\" />
-    <Folder Include="Users\Get\" />
     <Folder Include="Users\Update\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="15.1.0" />
     <PackageReference Include="MediatR" Version="13.1.0" />
   </ItemGroup>
 
