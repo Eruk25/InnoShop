@@ -1,6 +1,5 @@
+using InnoShop.UsersService.Domain.Enums;
+
 namespace InnoShop.UsersService.Application.Users.Results;
 
-public class UpdateUserByAdminResult
-{
-    
-}
+public record UpdateUserByAdminResult(int Id, Role Role, Status Status);
