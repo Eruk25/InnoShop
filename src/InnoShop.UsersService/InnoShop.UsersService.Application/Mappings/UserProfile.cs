@@ -1,6 +1,7 @@
 using AutoMapper;
 using InnoShop.UsersService.Application.Users;
 using InnoShop.UsersService.Application.Users.Register;
+using InnoShop.UsersService.Application.Users.Results;
 using InnoShop.UsersService.Domain.Entities;
 
 namespace InnoShop.UsersService.Application.Mappings;
