@@ -5,7 +5,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Users\Create\" />
+    <Folder Include="Users\Register" />
     <Folder Include="Users\Delete\" />
     <Folder Include="Users\Get\" />
     <Folder Include="Users\Update\" />
