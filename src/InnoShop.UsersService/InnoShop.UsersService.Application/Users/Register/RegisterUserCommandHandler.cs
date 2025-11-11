@@ -1,3 +1,4 @@
+using AutoMapper;
 using InnoShop.UsersService.Application.Abstractions.PasswordHasher;
 using InnoShop.UsersService.Application.Abstractions.Repositories;
 using InnoShop.UsersService.Domain.Entities;
@@ -8,13 +9,16 @@ namespace InnoShop.UsersService.Application.Users.Register;
 
 public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, RegisterUserResult>
 {
+    private readonly IMapper _mapper;
     private readonly IUserRepository _userRepository;
     private readonly IPasswordHasher _passwordHasher;
 
-    public RegisterUserCommandHandler(IUserRepository userRepository, IPasswordHasher passwordHasher)
+    public RegisterUserCommandHandler(IUserRepository userRepository,
+        IPasswordHasher passwordHasher, IMapper mapper)
     {
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
+        _mapper = mapper;
     }
 
     public async Task<RegisterUserResult> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
@@ -28,6 +32,6 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, R
         var user = new User(request.Name, request.Email, _passwordHasher.HashPassword(request.Password));
         var createdUser = await _userRepository.CreateAsync(user);
         
-        return new RegisterUserResult(createdUser.Id, createdUser.Name, createdUser.Email);
+        return _mapper.Map<RegisterUserResult>(createdUser);
     }
 }
