@@ -1,3 +1,4 @@
+using InnoShop.UsersService.Application.Users.Results;
 using MediatR;
 
 namespace InnoShop.UsersService.Application.Users.Register;
