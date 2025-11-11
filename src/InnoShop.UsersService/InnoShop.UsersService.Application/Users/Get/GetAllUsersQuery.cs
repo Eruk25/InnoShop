@@ -1,6 +1,6 @@
+using InnoShop.UsersService.Domain.Enums;
+using MediatR;
+
 namespace InnoShop.UsersService.Application.Users.Get;
 
-public class GetAllUsersQuery
-{
-    
-}
+public record GetAllUsersQuery() : IRequest<IEnumerable<UserDto>>;
