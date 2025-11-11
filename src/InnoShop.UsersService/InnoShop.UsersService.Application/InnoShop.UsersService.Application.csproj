@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Users\Register" />
-    <Folder Include="Users\Delete\" />
     <Folder Include="Users\Update\" />
   </ItemGroup>
 
