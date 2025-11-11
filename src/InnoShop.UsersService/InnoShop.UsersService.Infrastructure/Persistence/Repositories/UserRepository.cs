@@ -39,17 +39,10 @@ public class UserRepository : IUserRepository
         return user;
     }   
 
-    public async Task<User> UpdateAsync(int id, User user)
+    public async Task UpdateAsync(User user)
     {
-        var existing = await _context.Users.
-            FirstAsync(u => u.Id == id);
-        existing.UpdateName(user.Name);
-        existing.UpdateEmail(user.Email);
-        existing.UpdateRole(user.Role);
-        existing.UpdateStatus(user.Status);
-        existing.UpdatePassword(user.Password);
+        _context.Users.Update(user);
         await _context.SaveChangesAsync();
-        return existing;
     }
 
     public async Task<bool> DeleteAsync(int id)
