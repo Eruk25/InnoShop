@@ -26,6 +26,12 @@ public class UserRepository : IUserRepository
         return user;
     }
 
+    public async Task<bool> ExistByEmailAsync(string email)
+    {
+        var user = await _context.Users
+            .FirstOrDefaultAsync(u => u.Email == email);
+        return user is not null;
+    }
     public async Task<User> CreateAsync(User user)
     {
         await _context.Users.AddAsync(user);
