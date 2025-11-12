@@ -1,0 +1,38 @@
+using InnoShop.UsersService.API.DTOs.Requests;
+using InnoShop.UsersService.API.DTOs.Requests.Login;
+using InnoShop.UsersService.API.DTOs.Responses;
+using InnoShop.UsersService.Application.Users;
+using InnoShop.UsersService.Application.Users.Get;
+using InnoShop.UsersService.Application.Users.Login;
+using InnoShop.UsersService.Application.Users.Register;
+using InnoShop.UsersService.Domain.Entities;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace InnoShop.UsersService.API.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class AuthController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public AuthController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    public async Task<ActionResult<RegisterUserResponse>> RegisterAsync([FromBody] RegisterUserRequest request)
+    {
+        var user = await _mediator.Send(new RegisterUserCommand(
+            request.Name, request.Email, request.Password));
+        return Ok(new RegisterUserResponse(user.Id, user.Name, user.Email));
+    }
+
+    public async Task<ActionResult<string>> LoginAsync([FromBody] LoginUserRequest request)
+    {
+        var token = await _mediator.Send(new LoginUserCommand(
+            request.Email, request.Password));
+        return Ok(token);
+    }
+}
