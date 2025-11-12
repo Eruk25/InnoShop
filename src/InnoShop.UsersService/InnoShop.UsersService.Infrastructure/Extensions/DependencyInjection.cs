@@ -1,4 +1,5 @@
-using Identity.PasswordHasher;
+using InnoShop.UsersService.Application.Abstractions.PasswordHasher;
+using InnoShop.UsersService.Infrastructure.Implementations.PasswordHasher;
 using InnoShop.UsersService.Application.Abstractions.Repositories;
 using InnoShop.UsersService.Application.Abstractions.TokenGenerator;
 using InnoShop.UsersService.Infrastructure.Implementations.TokenGenerator;
@@ -16,9 +17,10 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         services.AddDbContext<UserContext>(opt =>
-            opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            opt.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
 
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<Identity.PasswordHasher.PasswordHasher>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<ITokenGenerator, TokenGenerator>();
         return services;
