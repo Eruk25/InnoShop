@@ -19,6 +19,7 @@ public static class DependencyInjection
             opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
         return services;
     }
 }
