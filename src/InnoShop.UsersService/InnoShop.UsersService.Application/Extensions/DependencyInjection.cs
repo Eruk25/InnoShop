@@ -1,3 +1,4 @@
+using InnoShop.UsersService.Application.Mappings;
 using InnoShop.UsersService.Application.Users.Get;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,7 +10,10 @@ public static class DependencyInjection
     {
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(GetAllUsersQuery).Assembly));
-        
+        services.AddAutoMapper(cfg =>
+        {
+            cfg.AddProfile<UserProfile>();
+        });
         return services;
     }
 }
