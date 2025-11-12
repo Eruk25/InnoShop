@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InnoShop.UsersService.Application\InnoShop.UsersService.Application.csproj" />
+    <ProjectReference Include="..\InnoShop.UsersService.Infrastructure\InnoShop.UsersService.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
