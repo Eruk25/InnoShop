@@ -9,11 +9,8 @@ public static class DependencyInjection
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddMediatR(cfg =>
-            cfg.RegisterServicesFromAssembly(typeof(GetAllUsersQuery).Assembly));
-        services.AddAutoMapper(cfg =>
-        {
-            cfg.AddProfile<UserProfile>();
-        });
+            cfg.RegisterServicesFromAssemblies(typeof(DependencyInjection).Assembly));
+        services.AddAutoMapper(typeof(UserProfile).Assembly);
         return services;
     }
 }
