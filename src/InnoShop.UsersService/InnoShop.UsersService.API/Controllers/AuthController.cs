@@ -1,11 +1,8 @@
-using InnoShop.UsersService.API.DTOs.Requests;
 using InnoShop.UsersService.API.DTOs.Requests.Login;
-using InnoShop.UsersService.API.DTOs.Responses;
-using InnoShop.UsersService.Application.Users;
-using InnoShop.UsersService.Application.Users.Get;
+using InnoShop.UsersService.API.DTOs.Requests.Register;
+using InnoShop.UsersService.API.DTOs.Responses.Register;
 using InnoShop.UsersService.Application.Users.Login;
 using InnoShop.UsersService.Application.Users.Register;
-using InnoShop.UsersService.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
