@@ -31,7 +31,7 @@ public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, string>
 
         if (!success)
             throw new AuthenticationException("Invalid password or email");
-        else
-            return _tokenGenerator.GenerateToken(user);
+        
+        return _tokenGenerator.GenerateToken(user);
     }
 }
