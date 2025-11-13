@@ -10,7 +10,10 @@ public static class DependencyInjection
     {
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssemblies(typeof(DependencyInjection).Assembly));
-        services.AddAutoMapper(typeof(UserProfile).Assembly);
+        services.AddAutoMapper(cfg =>
+        {
+            cfg.AddMaps(typeof(DependencyInjection).Assembly);
+        });
         return services;
     }
 }
