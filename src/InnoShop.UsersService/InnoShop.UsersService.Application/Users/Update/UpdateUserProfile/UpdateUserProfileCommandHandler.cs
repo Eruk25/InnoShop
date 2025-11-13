@@ -27,10 +27,12 @@ public class UpdateUserProfileCommandHandler : IRequestHandler<UpdateUserProfile
         
         if(user is null)
             throw new KeyNotFoundException($"User with id {request.Id} not found");
+
+        string? passwordHash = null;
+        if(!string.IsNullOrWhiteSpace(request.Password))
+            passwordHash = _passwordHasher.HashPassword(request.Password);
         
-        var passwordHash = _passwordHasher.HashPassword(request.Password);
         user.UpdateProfile(request.Name, request.Email, passwordHash);
-        
         await _userRepository.UpdateAsync(user);
         
         return _mapper.Map<UpdateUserProfileResult>(user);
