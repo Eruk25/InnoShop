@@ -19,6 +19,7 @@ public class AuthController : ControllerBase
         _mediator = mediator;
     }
 
+    [HttpPost("register")]
     public async Task<ActionResult<RegisterUserResponse>> RegisterAsync([FromBody] RegisterUserRequest request)
     {
         var user = await _mediator.Send(new RegisterUserCommand(
@@ -26,6 +27,7 @@ public class AuthController : ControllerBase
         return Ok(new RegisterUserResponse(user.Id, user.Name, user.Email));
     }
 
+    [HttpPost("login")]
     public async Task<ActionResult<string>> LoginAsync([FromBody] LoginUserRequest request)
     {
         var token = await _mediator.Send(new LoginUserCommand(
