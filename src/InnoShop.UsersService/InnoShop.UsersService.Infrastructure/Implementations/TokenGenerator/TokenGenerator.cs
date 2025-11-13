@@ -21,10 +21,10 @@ public class TokenGenerator : ITokenGenerator
     {
         var claims = new List<Claim>
         {
-            new Claim("Id", user.Id.ToString()),
-            new Claim("Name", user.Name),
-            new Claim("Email", user.Email),
-            new Claim("Role", user.Role.ToString())
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Name, user.Name),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, user.Role.ToString())
         };
         
         var jwt = new JwtSecurityToken(
