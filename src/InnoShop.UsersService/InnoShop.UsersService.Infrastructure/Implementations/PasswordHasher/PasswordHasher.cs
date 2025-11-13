@@ -16,8 +16,8 @@ public class PasswordHasher : IPasswordHasher
         return _hasher.HashPassword(password);
     }
 
-    public bool VerifyHashedPassword(string hashedPassword, string providedPassword)
+    public bool VerifyHashedPassword(string password, string hashedPassword)
     {
-        return _hasher.VerifyHashedPassword(hashedPassword, providedPassword);
+        return _hasher.VerifyHashedPassword(hashedPassword, password);
     }
 }
