@@ -18,7 +18,8 @@ public static class DependencyInjection
     {
         services.AddDbContext<UserContext>(opt =>
             opt.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
-
+        services.Configure<AuthOptions>(configuration.GetSection("AuthOptions"));
+        
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<Identity.PasswordHasher.PasswordHasher>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
