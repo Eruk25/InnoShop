@@ -7,5 +7,7 @@ public class UpdateUserByAdminRequest
 {
     public int Id { get; set; }
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public Role Role { get; set; }
+    public Role? Role { get; set; }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public Status? Status { get; set; }
 }
