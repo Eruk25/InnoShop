@@ -44,14 +44,16 @@ public class User
         Email = email;
     }
 
-    public void UpdateRole(Role role)
+    public void UpdateRole(Role? role)
     {
-        Role = role;
+        if(role.HasValue)
+            Role = role.Value;
     }
 
-    public void UpdateStatus(Status status)
+    public void UpdateStatus(Status? status)
     {
-        Status = status;
+        if(status.HasValue)
+            Status = status.Value;
     }
     
     public void UpdatePassword(string password)
