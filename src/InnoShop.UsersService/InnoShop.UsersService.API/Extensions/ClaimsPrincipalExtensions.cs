@@ -4,14 +4,14 @@ namespace InnoShop.UsersService.API.Extensions;
 
 public static class ClaimsPrincipalExtensions
 {
-    public static string GetUserId(this ClaimsPrincipal principal)
+    public static int GetUserId(this ClaimsPrincipal principal)
     {
         var userId = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
         if (userId is null)
             throw new KeyNotFoundException($"User with id {userId} not found");
 
-        return userId;
+        return int.Parse(userId);
     }
 
     public static string? GetEmail(this ClaimsPrincipal principal)
