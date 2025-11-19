@@ -18,16 +18,17 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.Price)
             .IsRequired()
             .HasColumnType("decimal(18,2)");
-        builder.Property(p => p.Status)
+        builder.Property(p => p.IsDeleted)
             .IsRequired();
         builder.Property(p => p.UserId)
             .IsRequired();
         builder.Property(p => p.CreatedAt)
             .IsRequired();
 
+        builder.HasQueryFilter(p => !p.IsDeleted);
         builder.HasIndex(p => p.Title)
             .HasDatabaseName("IDX_Products_Title");
         builder.HasIndex(p => p.UserId)
-            .HasDatabaseName("IDX_Products_UserId");;
+            .HasDatabaseName("IDX_Products_UserId");
     }
 }
