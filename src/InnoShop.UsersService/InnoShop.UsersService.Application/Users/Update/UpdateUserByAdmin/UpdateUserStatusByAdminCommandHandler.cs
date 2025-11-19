@@ -8,12 +8,12 @@ using MediatR;
 
 namespace InnoShop.UsersService.Application.Users.Update.UpdateUserByAdmin;
 
-public class UpdateUserByIdAdminCommandHandler : IRequestHandler<UpdateUserStatusByAdminCommand, UpdateUserByAdminResult>
+public class UpdateUserStatusByAdminCommandHandler : IRequestHandler<UpdateUserStatusByAdminCommand, UpdateUserByAdminResult>
 {
     private readonly IMapper _mapper;
     private readonly IUserRepository _userRepository;
 
-    public UpdateUserByIdAdminCommandHandler(IMapper mapper, IUserRepository userRepository)
+    public UpdateUserStatusByAdminCommandHandler(IMapper mapper, IUserRepository userRepository)
     {
         _mapper = mapper;
         _userRepository = userRepository;
