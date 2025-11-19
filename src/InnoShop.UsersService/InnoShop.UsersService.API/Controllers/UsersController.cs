@@ -4,6 +4,7 @@ using InnoShop.UsersService.API.DTOs.Requests.UpdateUserByAdmin;
 using InnoShop.UsersService.API.DTOs.Responses.UpdateUserByAdmin;
 using InnoShop.UsersService.API.Extensions;
 using InnoShop.UsersService.Application.Users.Update.UpdateUserByAdmin;
+using InnoShop.UsersService.Application.Users.Update.UpdateUserByAdmin.UpdateUserRole;
 using InnoShop.UsersService.Application.Users.Update.UpdateUserProfile;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -45,6 +46,23 @@ public class UsersController : ControllerBase
             Id = result.Id,
             Status = result.Status,
             Role = result.Role,
+        };
+        return Ok(response);
+    }
+
+    [HttpPatch]
+    [Authorize(Roles = "Admin")]
+    [Route("{id}/role")]
+    public async Task<ActionResult<UpdateUserByAdminResponse>> UpdateRoleAsync([FromBody] UpdateUserRoleByAdminRequest request)
+    {
+        var result = await _mediator.Send(new UpdateUserRoleByAdminCommand(
+            request.Id,
+            request.Role));
+        var response = new UpdateUserByAdminResponse
+        {
+            Id = result.Id,
+            Role = result.Role,
+            Status = result.Status,
         };
         return Ok(response);
     }
