@@ -1,5 +1,4 @@
-﻿using InnoShop.ProductsService.Domain.Enums;
-
+﻿
 namespace InnoShop.ProductsService.Domain.Entities;
 
 public class Product
@@ -8,7 +7,7 @@ public class Product
     public string Title { get; private set; }
     public string Description { get; private set; }
     public decimal Price { get; private set; }
-    public Status Status { get; private set; }
+    public bool IsDeleted { get; private set; }
     public int UserId { get; private set; }
     public DateTime CreatedAt { get; private set; }
 
@@ -17,7 +16,7 @@ public class Product
         UpdateTitle(title);
         UpdateDescription(description);
         UpdatePrice(price);
-        UpdateStatus(Status.Active);
+        UpdateStatus(false);
         UpdateUserId(userId);
         CreatedAt = DateTime.UtcNow;
     }
@@ -43,9 +42,9 @@ public class Product
         Price = price;
     }
 
-    public void UpdateStatus(Status status)
+    public void UpdateStatus(bool isDeleted)
     {
-        Status = status;
+        IsDeleted = isDeleted;
     }
 
     public void UpdateUserId(int userId)
