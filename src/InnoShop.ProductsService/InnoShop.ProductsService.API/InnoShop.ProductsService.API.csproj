@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InnoShop.ProductsService.Application\InnoShop.ProductsService.Application.csproj" />
+    <ProjectReference Include="..\InnoShop.ProductsService.Infrastructure\InnoShop.ProductsService.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
