@@ -26,6 +26,9 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .IsRequired();
 
         builder.HasQueryFilter(p => !p.IsDeleted);
+        
+        builder.HasIndex(p => p.IsDeleted)
+            .HasFilter("is_deleted = 0");
         builder.HasIndex(p => p.Title)
             .HasDatabaseName("IDX_Products_Title");
         builder.HasIndex(p => p.UserId)
