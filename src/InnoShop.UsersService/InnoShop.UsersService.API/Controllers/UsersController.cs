@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using InnoShop.UsersService.API.DTOs.Requests.UpdateProfile;
 using InnoShop.UsersService.API.DTOs.Requests.UpdateUserByAdmin;
+using InnoShop.UsersService.API.DTOs.Responses.UpdateUserByAdmin;
 using InnoShop.UsersService.API.Extensions;
 using InnoShop.UsersService.Application.Users.Update.UpdateUserByAdmin;
 using InnoShop.UsersService.Application.Users.Update.UpdateUserProfile;
@@ -34,11 +35,17 @@ public class UsersController : ControllerBase
 
     [HttpPatch]
     [Authorize(Roles = "Admin")]
-    [Route("id")]
-    public async Task<IActionResult> UpdateAsync([FromBody] UpdateUserByAdminRequest request)
+    [Route("{id}/status")]
+    public async Task<ActionResult<UpdateUserByAdminResponse>> UpdateStatusAsync([FromBody] UpdateUserStatusByAdminRequest request)
     {
-        var result = await _mediator.Send(new UpdateUserByAdminCommand(
-            request.Id, request.Role, request.Status));
-        return NoContent();
+        var result = await _mediator.Send(new UpdateUserStatusByAdminCommand(
+            request.Id, request.Status));
+        var response = new UpdateUserByAdminResponse
+        {
+            Id = result.Id,
+            Status = result.Status,
+            Role = result.Role,
+        };
+        return Ok(response);
     }
 }
