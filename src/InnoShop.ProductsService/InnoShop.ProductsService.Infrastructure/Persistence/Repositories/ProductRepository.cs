@@ -33,17 +33,10 @@ public class ProductRepository : IProductRepository
         return product.Id;
     }
 
-    public async Task<Product> UpdateAsync(int id, Product product)
+    public async Task UpdateAsync(Product product)
     {
-        var existing = await _context.Products
-            .FirstAsync(p => p.Id == id);
-        existing.UpdateTitle(product.Title);
-        existing.UpdateDescription(product.Description);
-        existing.UpdatePrice(product.Price);
-        existing.UpdateStatus(product.Status);
-        existing.UpdateUserId(product.UserId);
+        _context.Update(product);
         await _context.SaveChangesAsync();
-        return existing;
     }
 
     public async Task<bool> DeleteAsync(int id)
