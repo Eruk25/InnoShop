@@ -1,7 +1,9 @@
 ﻿
+using InnoShop.ProductsService.Domain.Primitives;
+
 namespace InnoShop.ProductsService.Domain.Entities;
 
-public class Product
+public class Product : ISoftDeletable
 {
     public int Id { get; private set; }
     public string Title { get; private set; }
