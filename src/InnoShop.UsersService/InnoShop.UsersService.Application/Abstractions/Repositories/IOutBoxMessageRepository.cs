@@ -2,7 +2,7 @@ using InnoShop.UsersService.Domain.Entities;
 
 namespace InnoShop.UsersService.Application.Abstractions.Repositories;
 
-public interface IOutBoxRepository
+public interface IOutBoxMessageRepository
 {
     public Task CreateAsync(OutBoxMessage message);
 };
