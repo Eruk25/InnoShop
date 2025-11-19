@@ -7,6 +7,7 @@ namespace InnoShop.UsersService.Infrastructure.Persistence.DB;
 public class UserContext(DbContextOptions<UserContext> options) : DbContext(options)
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<OutBoxMessage> OutBoxMessages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
