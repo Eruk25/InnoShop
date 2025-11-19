@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace InnoShop.UsersService.API.DTOs.Requests.UpdateUserByAdmin;
 
-public record UpdateUserRoleByAdminRequest
+public class UpdateUserRoleByAdminRequest
 {
     public int Id { get; set; }
     [JsonConverter(typeof(JsonStringEnumConverter))]
