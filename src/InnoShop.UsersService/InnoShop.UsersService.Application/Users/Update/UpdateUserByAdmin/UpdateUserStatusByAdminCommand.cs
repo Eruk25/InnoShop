@@ -4,5 +4,5 @@ using MediatR;
 
 namespace InnoShop.UsersService.Application.Users.Update.UpdateUserByAdmin;
 
-public record UpdateUserByAdminCommand(int Id, Role? Role, Status? Status)
+public record UpdateUserStatusByAdminCommand(int Id, Status? Status)
     : IRequest<UpdateUserByAdminResult>;
