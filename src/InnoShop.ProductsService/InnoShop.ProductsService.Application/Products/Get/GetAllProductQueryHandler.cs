@@ -18,6 +18,6 @@ public class GetAllProductQueryHandler : IRequestHandler<GetAllProductsQuery, IE
     {
         var products = await _productRepository.GetAllAsync();
         
-        
+        return _mapper.Map<IEnumerable<ProductDto>>(products);
     }
 }
