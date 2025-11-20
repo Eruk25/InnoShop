@@ -49,7 +49,7 @@ public class ProductsController : ControllerBase
     
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> CreateAsync(CreateProductRequest request)
+    public async Task<IActionResult> CreateAsync([FromBody]CreateProductRequest request)
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         await _mediator.Send(new CreateProductCommand(
@@ -62,7 +62,7 @@ public class ProductsController : ControllerBase
 
     [Authorize]
     [HttpPatch("{id}")]
-    public async Task<IActionResult> UpdateAsync(int id, UpdateProductRequest request)
+    public async Task<IActionResult> UpdateAsync(int id, [FromBody]UpdateProductRequest request)
     {
         await _mediator.Send(new UpdateProductCommand(
             id,
