@@ -38,13 +38,9 @@ public class ProductRepository : IProductRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task DeleteAsync(Product product)
     {
-        var product = _context.Products.FirstOrDefault(p => p.Id == id);
-        if(product is null)
-            return false;
         _context.Products.Remove(product);
         await _context.SaveChangesAsync();
-        return true;
     }
 }
