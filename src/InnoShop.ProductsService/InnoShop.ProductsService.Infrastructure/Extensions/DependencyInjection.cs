@@ -1,4 +1,6 @@
+using InnoShop.ProductsService.Application.Abstractions.Repositories;
 using InnoShop.ProductsService.Infrastructure.Persistence.DB;
+using InnoShop.ProductsService.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +14,8 @@ public static class DependencyInjection
     {
         services.AddDbContext<ProductContext>(opt =>
             opt.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
-        
+
+        services.AddScoped<IProductRepository, ProductRepository>();
         return services;
     }
 }
