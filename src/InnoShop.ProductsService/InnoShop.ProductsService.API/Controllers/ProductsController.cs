@@ -73,7 +73,7 @@ public class ProductsController : ControllerBase
     }
 
     [Authorize]
-    [HttpPatch("{id}/delete")]
+    [HttpDelete("{id}/delete")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
         await _mediator.Send(new DeleteProductCommand(id));
