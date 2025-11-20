@@ -23,6 +23,16 @@ public class Product : ISoftDeletable
         CreatedAt = DateTime.UtcNow;
     }
 
+    public void Update(string? title, string? description, decimal? price)
+    {
+        if(!string.IsNullOrWhiteSpace(title))
+            UpdateTitle(title);
+        if(!string.IsNullOrWhiteSpace(description))
+            UpdateDescription(description);
+        if(price.HasValue)
+            UpdatePrice(price.Value);
+    }
+    
     public void UpdateTitle(string title)
     {
         if(string.IsNullOrWhiteSpace(title))
