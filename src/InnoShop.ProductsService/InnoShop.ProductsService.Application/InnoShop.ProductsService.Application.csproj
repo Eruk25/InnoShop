@@ -7,9 +7,12 @@
   <ItemGroup>
     <Folder Include="Products\Create\" />
     <Folder Include="Products\Delete\" />
-    <Folder Include="Products\Get\" />
     <Folder Include="Products\Results\" />
     <Folder Include="Products\Update\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="13.1.0" />
   </ItemGroup>
 
   <PropertyGroup>
