@@ -1,6 +1,5 @@
+using MediatR;
+
 namespace InnoShop.ProductsService.Application.Products.Get;
 
-public class GetAllProductsQuery
-{
-    
-}
+public record GetAllProductsQuery() : IRequest<IEnumerable<ProductDto>>;
