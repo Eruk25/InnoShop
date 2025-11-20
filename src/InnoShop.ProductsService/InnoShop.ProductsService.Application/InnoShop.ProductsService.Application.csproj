@@ -4,6 +4,14 @@
     <ProjectReference Include="..\InnoShop.ProductsService.Domain\InnoShop.ProductsService.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Products\Create\" />
+    <Folder Include="Products\Delete\" />
+    <Folder Include="Products\Get\" />
+    <Folder Include="Products\Results\" />
+    <Folder Include="Products\Update\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
