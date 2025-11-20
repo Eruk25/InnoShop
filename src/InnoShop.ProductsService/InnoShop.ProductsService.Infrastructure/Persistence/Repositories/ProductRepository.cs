@@ -26,11 +26,10 @@ public class ProductRepository : IProductRepository
         return product;
     }
 
-    public async Task<Product> CreateAsync(Product product)
+    public async Task CreateAsync(Product product)
     {
         await _context.Products.AddAsync(product);
         await _context.SaveChangesAsync();
-        return product;
     }
 
     public async Task UpdateAsync(Product product)
