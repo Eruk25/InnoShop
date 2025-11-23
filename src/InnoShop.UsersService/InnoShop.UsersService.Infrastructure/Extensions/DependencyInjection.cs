@@ -24,6 +24,7 @@ public static class DependencyInjection
         services.Configure<AuthOptions>(configuration.GetSection("AuthOptions"));
         
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IEmailVerificationTokenRepository, EmailVerificationTokenRepository>();
         services.AddScoped<Identity.PasswordHasher.PasswordHasher>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<ITokenGenerator, TokenGenerator>();
