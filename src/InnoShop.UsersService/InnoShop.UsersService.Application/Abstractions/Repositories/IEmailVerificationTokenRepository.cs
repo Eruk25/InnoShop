@@ -4,5 +4,7 @@ namespace InnoShop.UsersService.Application.Abstractions.Repositories;
 
 public interface IEmailVerificationTokenRepository
 {
-    public Task CreateAsync(EmailVerificationToken token);
+    public Task<Domain.Entities.EmailVerificationToken?> GetByIdAsync(Guid tokenId);
+    public Task CreateAsync(Domain.Entities.EmailVerificationToken token);
+    public Task DeleteAsync(Domain.Entities.EmailVerificationToken token);
 }
