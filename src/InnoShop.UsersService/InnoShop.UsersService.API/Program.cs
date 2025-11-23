@@ -1,13 +1,13 @@
-using System.Security.Claims;
-using System.Text;
 using InnoShop.UsersService.API.Extensions;
 using InnoShop.UsersService.Application.Extensions;
 using InnoShop.UsersService.Infrastructure.Extensions;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile("appsettings.Development.json", optional: true)
+    .AddEnvironmentVariables();
 
 builder.Services
     .AddPresentation(builder.Configuration)
