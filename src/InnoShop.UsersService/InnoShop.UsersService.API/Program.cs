@@ -14,6 +14,8 @@ builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddApplication();
 
+builder.Services
+    .AddFluentEmail(builder.Configuration);
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
