@@ -1,6 +1,7 @@
 using InnoShop.UsersService.API.DTOs.Requests.Login;
 using InnoShop.UsersService.API.DTOs.Requests.Register;
 using InnoShop.UsersService.API.DTOs.Responses.Register;
+using InnoShop.UsersService.Application.EmailVerificationToken.VerifyEmail;
 using InnoShop.UsersService.Application.Users.Login;
 using InnoShop.UsersService.Application.Users.Register;
 using MediatR;
@@ -33,5 +34,12 @@ public class AuthController : ControllerBase
         var token = await _mediator.Send(new LoginUserCommand(
             request.Email, request.Password));
         return Ok(token);
+    }
+
+    [HttpPost("verify-email")]
+    public async Task<IActionResult> VerifyEmailAsync(Guid token)
+    {
+        var success = await _mediator.Send(new VerifyEmailCommand(token));
+        return success ? Ok() : BadRequest();
     }
 }
