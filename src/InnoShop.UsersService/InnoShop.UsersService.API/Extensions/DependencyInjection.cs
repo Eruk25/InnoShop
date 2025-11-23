@@ -1,5 +1,7 @@
 using System.Security.Claims;
 using System.Text;
+using InnoShop.UsersService.API.Implementations;
+using InnoShop.UsersService.Application.Abstractions.UrlGenerator;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -56,7 +58,7 @@ public static class DependencyInjection
                 };
             });
         services.AddAuthorization();
-
+        services.AddScoped<IUrlGenerator, UrlGenerator>();
         return services;
     }
 }
