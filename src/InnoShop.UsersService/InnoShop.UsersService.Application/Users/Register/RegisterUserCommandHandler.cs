@@ -14,19 +14,22 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, R
 {
     private readonly IMapper _mapper;
     private readonly IUserRepository _userRepository;
+    private readonly IEmailVerificationTokenRepository _emailVerificationTokenRepository;
     private readonly IPasswordHasher _passwordHasher;
     private readonly IEmailSender _emailSender;
     private readonly IUrlGenerator _urlGenerator;
 
     public RegisterUserCommandHandler(IUserRepository userRepository,
         IPasswordHasher passwordHasher, IMapper mapper,
-        IEmailSender emailSender, IUrlGenerator urlGenerator)
+        IEmailSender emailSender, IUrlGenerator urlGenerator,
+        IEmailVerificationTokenRepository emailVerificationTokenRepository)
     {
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
         _mapper = mapper;
         _emailSender = emailSender;
         _urlGenerator = urlGenerator;
+        _emailVerificationTokenRepository = emailVerificationTokenRepository;
     }
 
     public async Task<RegisterUserResult> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
@@ -47,6 +50,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, R
             CreatedAt = DateTime.UtcNow,
             ExpiresAt = DateTime.UtcNow.AddMinutes(30)
         };
+        await _emailVerificationTokenRepository.CreateAsync(token);
         string verificationLink = _urlGenerator.GenerateLink(token);
         await _emailSender.SendEmailAsync(user.Email, verificationLink);
         
