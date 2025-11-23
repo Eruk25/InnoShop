@@ -43,7 +43,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, R
         var user = new User(request.Name, request.Email, _passwordHasher.HashPassword(request.Password));
         var createdUser = await _userRepository.CreateAsync(user);
 
-        var token = new EmailVerificationToken
+        var token = new Domain.Entities.EmailVerificationToken
         {
             Id = Guid.NewGuid(),
             UserId = user.Id,
