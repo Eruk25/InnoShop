@@ -1,8 +1,10 @@
+using InnoShop.UsersService.Application.Abstractions.EmailSender;
 using InnoShop.UsersService.Application.Abstractions.PasswordHasher;
 using InnoShop.UsersService.Infrastructure.Implementations.PasswordHasher;
 using InnoShop.UsersService.Application.Abstractions.Repositories;
 using InnoShop.UsersService.Application.Abstractions.TokenGenerator;
 using InnoShop.UsersService.Infrastructure.HostedServices;
+using InnoShop.UsersService.Infrastructure.Implementations.EmailSender;
 using InnoShop.UsersService.Infrastructure.Implementations.TokenGenerator;
 using InnoShop.UsersService.Infrastructure.Persistence.DB;
 using InnoShop.UsersService.Infrastructure.Persistence.Repositories;
@@ -25,6 +27,7 @@ public static class DependencyInjection
         
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IEmailVerificationTokenRepository, EmailVerificationTokenRepository>();
+        services.AddScoped<IEmailSender, EmailSender>();
         services.AddScoped<Identity.PasswordHasher.PasswordHasher>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<ITokenGenerator, TokenGenerator>();
