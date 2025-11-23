@@ -12,12 +12,11 @@ public class EmailSender : IEmailSender
         _email = email;
     }
     
-    public async Task SendEmailAsync(string email, string subject)
+    public async Task SendEmailAsync(string email, string verificationLink)
     {
-        string verificationLink = "";
         await _email
             .To(email)
-            .Subject(subject)
+            .Subject("Email verification for InnoShop")
             .Body($"To verify your email address <a href={verificationLink}>click here</a>", isHtml: true)
             .SendAsync();
     }
