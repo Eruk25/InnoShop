@@ -10,6 +10,7 @@ public class User
     public Role Role { get; private set; }
     public Status Status { get; private set; }
     public string Password { get; private set; }
+    public bool IsConfirmed { get; private set; }
 
     public User(string name, string email, string password)
     {
@@ -18,6 +19,7 @@ public class User
         UpdatePassword(password);
         UpdateRole(Role.Seller);
         UpdateStatus(Status.Active);
+        UpdateConfirm(false);
     }
 
     public void UpdateProfile(string? name, string? email, string? password)
@@ -63,5 +65,10 @@ public class User
         if(password.Length < 6)
             throw new ArgumentException("Password must be at least 6 characters", nameof(password));
         Password = password;
+    }
+
+    public void UpdateConfirm(bool confirmed)
+    {
+        IsConfirmed = confirmed;
     }
 }
