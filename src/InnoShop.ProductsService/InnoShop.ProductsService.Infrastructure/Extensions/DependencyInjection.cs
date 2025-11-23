@@ -12,8 +12,10 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services,
         IConfiguration configuration)
     {
+        var productSection = configuration.GetSection("ProductService:ConnectionStrings");
+        var connectionString = productSection["DefaultConnection"];
         services.AddDbContext<ProductContext>(opt =>
-            opt.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
+            opt.UseSqlServer(connectionString));
 
         services.AddScoped<IProductRepository, ProductRepository>();
         return services;
