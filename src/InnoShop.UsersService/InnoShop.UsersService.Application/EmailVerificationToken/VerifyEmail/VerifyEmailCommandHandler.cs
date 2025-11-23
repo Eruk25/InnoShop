@@ -15,7 +15,13 @@ public class VerifyEmailCommandHandler : IRequestHandler<VerifyEmailCommand, boo
     public async Task<bool> Handle(VerifyEmailCommand request, CancellationToken cancellationToken)
     {
         var token = await _emailVerificationTokenRepository.GetByIdAsync(request.TokenId);
-        
-        if(token is null || token.Ex)
+
+        if (token is null || token.ExpiresAt < DateTime.UtcNow || token.User.IsConfirmed)
+            return false;
+
+        token.User.UpdateConfirm(true);
+
+        await _emailVerificationTokenRepository.DeleteAsync(token);
+        return true;
     }
 }
