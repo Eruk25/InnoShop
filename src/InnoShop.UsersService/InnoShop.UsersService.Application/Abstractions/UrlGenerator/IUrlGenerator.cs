@@ -4,5 +4,5 @@ namespace InnoShop.UsersService.Application.Abstractions.UrlGenerator;
 
 public interface IUrlGenerator
 {
-    public string GenerateLink(EmailVerificationToken emailVerificationToken);
+    public string GenerateLink(Domain.Entities.EmailVerificationToken emailVerificationToken);
 }
