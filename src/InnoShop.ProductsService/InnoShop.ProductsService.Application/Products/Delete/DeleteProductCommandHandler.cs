@@ -14,11 +14,11 @@ public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand>
 
     public async Task Handle(DeleteProductCommand request, CancellationToken cancellationToken)
     {
-        var product = await _productRepository.GetByIdAsync(request.Id);
+        var products = await _productRepository.GetByUserIdAsync(request.Id);
         
-        if(product is null)
-            throw new KeyNotFoundException($"Product with id {request.Id} not found");
+        if(products is null)
+            throw new KeyNotFoundException($"Product with UserId {request.Id} not found");
         
-        await _productRepository.DeleteAsync(product);
+        await _productRepository.DeleteAsync(products);
     }
 }
