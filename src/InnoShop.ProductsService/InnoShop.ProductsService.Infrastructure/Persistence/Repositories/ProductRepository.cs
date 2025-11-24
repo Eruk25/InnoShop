@@ -26,6 +26,13 @@ public class ProductRepository : IProductRepository
         return product;
     }
 
+    public async Task<IEnumerable<Product>> GetByUserIdAsync(int userId)
+    {
+        var products = await _context.Products
+            .Where(p => p.UserId == userId).ToListAsync();
+        return products;
+    }
+
     public async Task CreateAsync(Product product)
     {
         await _context.Products.AddAsync(product);
@@ -38,9 +45,9 @@ public class ProductRepository : IProductRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(Product product)
+    public async Task DeleteAsync(IEnumerable<Product> products)
     {
-        _context.Products.Remove(product);
+        _context.Products.RemoveRange(products);
         await _context.SaveChangesAsync();
     }
 }
