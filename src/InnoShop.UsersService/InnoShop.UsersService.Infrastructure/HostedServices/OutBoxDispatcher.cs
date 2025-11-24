@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using System.Text.Json;
+using InnoShop.UsersService.Domain.Primitives;
 using InnoShop.UsersService.Infrastructure.Persistence.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,9 +35,9 @@ public class OutBoxDispatcher : BackgroundService
             {
                 try
                 {
-                    var response = await _httpClient.PostAsJsonAsync(
-                        "http://localhost:5097/api/products/",
-                        JsonSerializer.Deserialize<object>(msg.Payload),
+                    var payload = JsonSerializer.Deserialize<UserDeletedEvent>(msg.Payload);
+                    var response = await _httpClient.DeleteAsync(
+                        $"http://localhost:5188/api/products/{payload.UserId}/delete",
                         stoppingToken);
                     
                     response.EnsureSuccessStatusCode();
