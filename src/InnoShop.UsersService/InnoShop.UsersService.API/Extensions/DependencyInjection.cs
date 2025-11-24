@@ -59,6 +59,7 @@ public static class DependencyInjection
             });
         services.AddAuthorization();
         services.AddScoped<IUrlGenerator, UrlGenerator>();
+        services.AddHttpContextAccessor();
         return services;
     }
 }
