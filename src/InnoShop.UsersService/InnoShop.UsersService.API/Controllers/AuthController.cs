@@ -36,7 +36,7 @@ public class AuthController : ControllerBase
         return Ok(token);
     }
 
-    [HttpPost("verify-email")]
+    [HttpGet("verify-email")]
     public async Task<IActionResult> VerifyEmailAsync(Guid token)
     {
         var success = await _mediator.Send(new VerifyEmailCommand(token));
