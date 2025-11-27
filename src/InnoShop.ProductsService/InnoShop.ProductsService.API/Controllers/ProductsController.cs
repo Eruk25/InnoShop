@@ -72,8 +72,8 @@ public class ProductsController : ControllerBase
         return Ok();
     }
 
-    [Authorize]
-    [HttpDelete("{id}/soft-delete")]
+    [Authorize(AuthenticationSchemes = "ServiceAuth")]
+    [HttpPost("{id}/soft-delete")]
     public async Task<IActionResult> SoftDeleteAsync(int id)
     {
         await _mediator.Send(new DeleteProductCommand(id));
