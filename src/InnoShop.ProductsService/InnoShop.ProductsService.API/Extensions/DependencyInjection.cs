@@ -25,6 +25,20 @@ public static class DependencyInjection
                     IssuerSigningKey = new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes(configuration["AuthOptions:SecretKey"])),
                 };
+            })
+            .AddJwtBearer("ServiceAuth",options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {   
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidIssuer = configuration["ServiceAuth:Issuer"],
+                    ValidAudience = configuration["ServiceAuth:Issuer"],
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(configuration["ServiceAuth:Secret"])),
+                };
             });
         return services;
     }
