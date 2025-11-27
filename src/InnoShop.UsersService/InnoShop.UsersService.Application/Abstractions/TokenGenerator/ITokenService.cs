@@ -1,6 +1,6 @@
 namespace InnoShop.UsersService.Application.Abstractions.TokenGenerator;
 
-public class ITokenService
+public interface ITokenService
 {
-    
+    public Task<string> GenerateServiceTokenAsync(string secretKey, string issuer);
 }
