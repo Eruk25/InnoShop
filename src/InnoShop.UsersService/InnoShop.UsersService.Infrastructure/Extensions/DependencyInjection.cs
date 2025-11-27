@@ -31,6 +31,7 @@ public static class DependencyInjection
         services.AddScoped<Identity.PasswordHasher.PasswordHasher>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<ITokenGenerator, TokenGenerator>();
+        services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IOutBoxMessageRepository, OutBoxMessageRepository>();
         services.AddHostedService<OutBoxDispatcher>();
         return services;
