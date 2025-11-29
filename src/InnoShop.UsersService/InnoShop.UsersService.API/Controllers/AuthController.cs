@@ -2,9 +2,12 @@ using InnoShop.UsersService.API.DTOs.Requests.Login;
 using InnoShop.UsersService.API.DTOs.Requests.Register;
 using InnoShop.UsersService.API.DTOs.Responses.Register;
 using InnoShop.UsersService.Application.EmailVerificationToken.VerifyEmail;
+using InnoShop.UsersService.Application.PasswordVerificationToken;
 using InnoShop.UsersService.Application.Users.Login;
 using InnoShop.UsersService.Application.Users.Register;
+using InnoShop.UsersService.Application.Users.Update.UpdateUserPassword;
 using MediatR;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnoShop.UsersService.API.Controllers;
@@ -41,5 +44,24 @@ public class AuthController : ControllerBase
     {
         var success = await _mediator.Send(new VerifyEmailCommand(token));
         return success ? Ok() : BadRequest();
+    }
+    
+    [HttpPost]
+    [Route("forgot-password")]
+    public async Task<IActionResult> ForgotPasswordAsync([FromBody] ForgotPasswordRequest request)
+    {
+        await _mediator.Send(new ForgotPasswordCommand(request.Email));
+        return Ok();
+    }
+    
+    [HttpPatch]
+    [Route("reset-password")]
+    public async Task<IActionResult> ResetPasswordAsync([FromBody] ResetPasswordRequest request)
+    {
+        await _mediator.Send(new UpdateUserPasswordCommand(
+            request.Email,
+            request.ResetCode,
+            request.NewPassword));
+        return Ok();
     }
 }
