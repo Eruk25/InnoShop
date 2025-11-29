@@ -1,6 +1,3 @@
 namespace InnoShop.ProductsService.API.DTOs.Filters;
 
-public class ProductFilterQuery
-{
-    
-}
+public record ProductFilterQuery(string? Search, int? MinPrice, int? MaxPrice);
