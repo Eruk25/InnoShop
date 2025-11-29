@@ -1,5 +1,8 @@
+using FluentValidation;
+using InnoShop.UsersService.Application.Common.Behaviors;
 using InnoShop.UsersService.Application.Mappings;
 using InnoShop.UsersService.Application.Users.Get;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace InnoShop.UsersService.Application.Extensions;
@@ -14,6 +17,8 @@ public static class DependencyInjection
         {
             cfg.AddMaps(typeof(DependencyInjection).Assembly);
         });
+        services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
         return services;
     }
 }
