@@ -3,9 +3,9 @@ using InnoShop.ProductsService.Domain.Entities;
 
 namespace InnoShop.ProductsService.Infrastructure.Extensions.Products;
 
-public static class ProductExtensions
+public static class ProductQueryableExtensions
 {
-    public static IQueryable<Product> ApplyFilter(IQueryable<Product> query, ProductSearchCriteria filters)
+    public static IQueryable<Product> ApplyFilter(this IQueryable<Product> query, ProductSearchCriteria filters)
     {
         if(!string.IsNullOrWhiteSpace(filters.Search))
             query = query.Where(p => p.Title.Contains(filters.Search) || p.Description.Contains(filters.Search));
