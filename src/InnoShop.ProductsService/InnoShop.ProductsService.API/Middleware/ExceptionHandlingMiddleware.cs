@@ -1,7 +1,7 @@
 using System.Text.Json;
-using InnoShop.UsersService.Application.Common.Exceptions;
+using InnoShop.ProductsService.Application.Common.Exceptions;
 
-namespace InnoShop.UsersService.API.Middleware;
+namespace InnoShop.ProductsService.API.Middleware;
 
 public class ExceptionHandlingMiddleware : IMiddleware
 {
