@@ -1,8 +1,10 @@
 using System.Security.Claims;
+using InnoShop.ProductsService.API.DTOs.Filters;
 using InnoShop.ProductsService.API.DTOs.Requests;
 using InnoShop.ProductsService.API.DTOs.Responses;
 using InnoShop.ProductsService.Application.Products.Create;
 using InnoShop.ProductsService.Application.Products.Delete;
+using InnoShop.ProductsService.Application.Products.Filters;
 using InnoShop.ProductsService.Application.Products.Get;
 using InnoShop.ProductsService.Application.Products.Update;
 using MediatR;
@@ -23,9 +25,14 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductResponse>>> GetProductsAsync()
+    public async Task<ActionResult<IEnumerable<ProductResponse>>> GetAllAsync([FromBody]ProductFilterQuery request)
     {
-        var products = await _mediator.Send(new GetAllProductsQuery());
+        var filters = new ProductSearchCriteria(
+            request.Search,
+            request.MinPrice,
+            request.MaxPrice);
+        
+        var products = await _mediator.Send(new GetAllProductsQuery(filters));
         var response = products.
             Select(p => new ProductResponse(
                 p.Id,
@@ -36,7 +43,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<ProductResponse>> GetProductAsync(int id)
+    public async Task<ActionResult<ProductResponse>> GetByIdAsync(int id)
     {
         var product = await _mediator.Send(new GetProductByIdQuery(id));
         var response = new ProductResponse(
