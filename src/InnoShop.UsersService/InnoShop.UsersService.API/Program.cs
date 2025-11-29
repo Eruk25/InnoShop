@@ -1,4 +1,5 @@
 using InnoShop.UsersService.API.Extensions;
+using InnoShop.UsersService.API.Middleware;
 using InnoShop.UsersService.Application.Extensions;
 using InnoShop.UsersService.Infrastructure.Extensions;
 
@@ -24,6 +25,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
