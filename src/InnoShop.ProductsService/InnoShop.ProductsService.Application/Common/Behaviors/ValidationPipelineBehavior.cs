@@ -1,8 +1,8 @@
 using FluentValidation;
 using MediatR;
-using ValidationException = InnoShop.UsersService.Application.Common.Exceptions.ValidationException;
+using ValidationException = InnoShop.ProductsService.Application.Common.Exceptions.ValidationException;
 
-namespace InnoShop.UsersService.Application.Common.Behaviors;
+namespace InnoShop.ProductsService.Application.Common.Behaviors;
 
 public sealed class ValidationPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : notnull
