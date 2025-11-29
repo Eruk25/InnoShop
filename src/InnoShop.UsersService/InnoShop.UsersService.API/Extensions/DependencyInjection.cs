@@ -59,6 +59,7 @@ public static class DependencyInjection
             });
         services.AddAuthorization();
         services.AddScoped<IUrlGenerator, UrlGenerator>();
+        services.AddScoped<IPasswordResetLinkFactory, PasswordResetLinkFactory>();
         services.AddHttpContextAccessor();
         return services;
     }
