@@ -1,7 +1,16 @@
 namespace InnoShop.UsersService.Domain.Entities;
 
-public class PasswordVerificationToken
+public class PasswordResetToken
 {
-    public int UserId { get; set; }
-    
+    public Guid Id { get; }
+    public int UserId { get; }
+    public DateTime ExpiresAt { get; }
+
+    public PasswordResetToken(Guid id, int userId, DateTime expiresAt)
+    {
+        Id = id;
+        UserId = userId;
+        ExpiresAt = expiresAt;
+    }
+    public  PasswordResetToken(){}
 }
