@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using System.Text;
 using InnoShop.UsersService.API.Implementations;
+using InnoShop.UsersService.API.Middleware;
 using InnoShop.UsersService.Application.Abstractions.UrlGenerator;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -60,6 +61,7 @@ public static class DependencyInjection
         services.AddAuthorization();
         services.AddScoped<IUrlGenerator, UrlGenerator>();
         services.AddScoped<IPasswordResetLinkFactory, PasswordResetLinkFactory>();
+        services.AddTransient<ExceptionHandlingMiddleware>();
         services.AddHttpContextAccessor();
         return services;
     }
