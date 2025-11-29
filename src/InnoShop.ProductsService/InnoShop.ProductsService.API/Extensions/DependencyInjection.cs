@@ -1,4 +1,5 @@
 using System.Text;
+using InnoShop.ProductsService.API.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -40,6 +41,7 @@ public static class DependencyInjection
                     Encoding.UTF8.GetBytes(configuration["ServiceAuth:Secret"])),
                 };
             });
+        services.AddTransient<ExceptionHandlingMiddleware>();
         return services;
     }
 }
