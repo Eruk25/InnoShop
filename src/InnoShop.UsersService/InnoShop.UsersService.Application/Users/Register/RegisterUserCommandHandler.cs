@@ -52,7 +52,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, R
         };
         await _emailVerificationTokenRepository.CreateAsync(token);
         string verificationLink = _urlGenerator.GenerateLink(token);
-        await _emailSender.SendEmailAsync(user.Email, verificationLink);
+        await _emailSender.SendEmailAsync(user.Email, $"To verify your email address <a href={verificationLink}>click here</a>");
         
         return _mapper.Map<RegisterUserResult>(createdUser);
     }
