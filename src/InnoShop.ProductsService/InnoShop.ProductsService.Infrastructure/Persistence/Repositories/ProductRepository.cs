@@ -1,5 +1,7 @@
 using InnoShop.ProductsService.Application.Abstractions.Repositories;
+using InnoShop.ProductsService.Application.Products.Filters;
 using InnoShop.ProductsService.Domain.Entities;
+using InnoShop.ProductsService.Infrastructure.Extensions.Products;
 using InnoShop.ProductsService.Infrastructure.Persistence.DB;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,9 +16,11 @@ public class ProductRepository : IProductRepository
         _context = context;
     }
     
-    public async Task<IEnumerable<Product>> GetAllAsync()
+    public async Task<IEnumerable<Product>> GetAllAsync(ProductSearchCriteria filters)
     {
-        return await _context.Products.ToListAsync();
+        return await _context.Products
+            .ApplyFilter(filters)
+            .ToListAsync();
     }
 
     public async Task<Product?> GetByIdAsync(int id)
