@@ -1,4 +1,5 @@
 using InnoShop.ProductsService.API.Extensions;
+using InnoShop.ProductsService.API.Middleware;
 using InnoShop.ProductsService.Application.Extensions;
 using InnoShop.ProductsService.Infrastructure.Extensions;
 
@@ -19,6 +20,7 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpsRedirection();
