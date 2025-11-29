@@ -1,4 +1,4 @@
-namespace InnoShop.UsersService.Application.Common.Exceptions;
+namespace InnoShop.ProductsService.Application.Common.Exceptions;
 
 public class BadRequestException : Exception
 {
