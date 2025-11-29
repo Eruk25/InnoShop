@@ -1,6 +1,5 @@
+using MediatR;
+
 namespace InnoShop.UsersService.Application.PasswordVerificationToken;
 
-public class ForgotPasswordCommand
-{
-    
-}
+public record ForgotPasswordCommand(string Email) : IRequest;
