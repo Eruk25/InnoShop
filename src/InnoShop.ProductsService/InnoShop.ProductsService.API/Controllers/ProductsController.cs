@@ -25,7 +25,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductResponse>>> GetAllAsync([FromBody]ProductFilterQuery request)
+    public async Task<ActionResult<IEnumerable<ProductResponse>>> GetAllAsync([FromQuery]ProductFilterQuery request)
     {
         var filters = new ProductSearchCriteria(
             request.Search,
