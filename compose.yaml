@@ -1,0 +1,49 @@
+﻿services:
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: innoshop_sql
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "strongPassword123!"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+    networks:
+      - innoshop-net
+
+  users-service:
+    build: ./src/InnoShop.UsersService
+    container_name: innoshop_users
+    depends_on:
+      - sqlserver
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:8080"
+      UserService__ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=UserService;TrustServerCertificate=True;User Id=SA;Password=strongPassword123!"
+      Email__Password: "qpvc oobm ucao yrgm"
+    ports:
+      - "5001:8080"
+    networks:
+      - innoshop-net
+
+  products-service:
+    build: ./src/InnoShop.ProductsService
+    container_name: innoshop_products
+    depends_on:
+      - sqlserver
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:8080"
+      ProductService__ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=ProductService;TrustServerCertificate=True;User Id=SA;Password=strongPassword123!"
+    ports:
+      - "5002:8080"
+    networks:
+      - innoshop-net
+
+networks:
+  innoshop-net:
+
+volumes:
+  mssql_data:
