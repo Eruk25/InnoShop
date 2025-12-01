@@ -2,6 +2,8 @@ using InnoShop.UsersService.API.Extensions;
 using InnoShop.UsersService.API.Middleware;
 using InnoShop.UsersService.Application.Extensions;
 using InnoShop.UsersService.Infrastructure.Extensions;
+using InnoShop.UsersService.Infrastructure.Persistence.DB;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +26,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+using var scope = app.Services.CreateScope();
+var db = scope.ServiceProvider.GetRequiredService<UserContext>();
+await db.Database.MigrateAsync();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthentication();
